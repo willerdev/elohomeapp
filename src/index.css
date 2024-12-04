@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+/* Swiper styles */
+.swiper-pagination-bullet {
+  @apply bg-white opacity-60;
+}
+
+.swiper-pagination-bullet-active {
+  @apply bg-white opacity-100;
+}

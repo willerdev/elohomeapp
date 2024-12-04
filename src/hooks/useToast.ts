@@ -1,0 +1,28 @@
+import { useState } from 'react';
+
+type ToastType = 'success' | 'error' | 'info';
+
+interface Toast {
+  message: string;
+  type: ToastType;
+  id: number;
+}
+
+export const useToast = () => {
+  const [toasts, setToasts] = useState<Toast[]>([]);
+
+  const showToast = (message: string, type: ToastType = 'info') => {
+    const id = Date.now();
+    setToasts(prev => [...prev, { message, type, id }]);
+
+    // Remove toast after 3 seconds
+    setTimeout(() => {
+      setToasts(prev => prev.filter(toast => toast.id !== id));
+    }, 3000);
+  };
+
+  return {
+    toasts,
+    showToast,
+  };
+};
