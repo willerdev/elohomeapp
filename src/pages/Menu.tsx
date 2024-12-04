@@ -1,11 +1,9 @@
 import {
   User,
-  Settings,
   HelpCircle,
   LogOut,
   ShoppingBag,
   Search,
-  ShieldCheck,
   Phone,
   FileText,
   MessageSquare,

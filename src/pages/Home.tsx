@@ -7,15 +7,16 @@ import { fetchUserFavorites } from '../lib/supabase.service';
 import { applyFilters, saveSearch } from '../lib/search.service';
 import { useAuth } from '../contexts/AuthContext';
 import { useToast } from '../hooks/useToast';
+import type { Listing } from '../lib/supabase.service';
 
 export const Home = () => {
   const { user } = useAuth();
   const { showToast } = useToast();
-  const [listings, setListings] = useState([]);
+  const [listings, setListings] = useState<Listing[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [favorites, setFavorites] = useState<string[]>([]);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery] = useState('');
   const [activeFilters, setActiveFilters] = useState<FilterValues>({});
 
   useEffect(() => {
@@ -115,7 +116,8 @@ export const Home = () => {
                   title: listing.title,
                   price: listing.price,
                   description: listing.description,
-                  images: listing.image_urls || [],
+                  image_urls: listing.images || [],
+                  images: listing.images || [],
                   location: listing.location,
                   date: new Date(listing.created_at).toLocaleDateString(),
                   category: listing.category

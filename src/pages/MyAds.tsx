@@ -114,7 +114,8 @@ export const MyAds = () => {
                   title: listing.title,
                   price: listing.price,
                   description: listing.description,
-                  images: listing.image_urls || [],
+                  image_urls: listing.images || [],
+                  images: listing.images || [],
                   location: listing.location,
                   date: new Date(listing.created_at).toLocaleDateString(),
                   category: listing.category
