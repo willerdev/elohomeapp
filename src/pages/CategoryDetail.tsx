@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { ProductCard } from '../components/ProductCard';
-import { fetchListingsByCategory } from '../lib/supabase.service';
+
 import { FilterSection, FilterValues } from '../components/FilterSection';
 import { applyFilters } from '../lib/search.service';
 import type { Listing } from '../lib/supabase.service';
+
+
 
 export const CategoryDetail = () => {
   const { category } = useParams<{ category: string }>();
@@ -16,7 +18,7 @@ export const CategoryDetail = () => {
     return saved ? JSON.parse(saved) : [];
   });
   const [activeFilters, setActiveFilters] = useState<FilterValues>({});
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery] = useState('');
 
   useEffect(() => {
     const loadListings = async () => {
@@ -118,7 +120,8 @@ export const CategoryDetail = () => {
                   title: listing.title,
                   price: listing.price,
                   description: listing.description,
-                  image: listing.image_url,
+                  image_urls: listing.images || [],
+                  images: listing.images || [],
                   location: listing.location,
                   date: new Date(listing.created_at).toLocaleDateString(),
                   category: listing.category

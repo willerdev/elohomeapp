@@ -4,6 +4,7 @@ export interface Product {
   price: number;
   description: string;
   image_urls: string[];
+  images: string[];
   location: string;
   date: string;
   category: string;
@@ -19,9 +20,13 @@ export interface Message {
 export interface Conversation {
   id: string;
   name: string;
-  lastMessage: string;
-  lastMessageTime: string;
-  messages: Message[];
+  messages: {
+    content: string;
+    time: string;
+    isSender: boolean;
+  }[];
+  lastMessage?: string;
+  lastMessageTime?: string;
 }
 
 export interface AppState {

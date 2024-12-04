@@ -1,19 +1,20 @@
 import { useState } from 'react';
 import { ArrowLeft, Send, User } from 'lucide-react';
-import { Conversation, Message } from '../types';
+import { Conversation } from '../types';
 
 interface ChatWindowProps {
   conversation: Conversation;
   onBack: () => void;
+  onSendMessage: (content: string) => Promise<void>;
 }
 
-export const ChatWindow = ({ conversation, onBack }: ChatWindowProps) => {
+export const ChatWindow = ({ conversation, onBack, onSendMessage }: ChatWindowProps) => {
   const [newMessage, setNewMessage] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (newMessage.trim()) {
-      // Handle sending message here
+      onSendMessage(newMessage);
       setNewMessage('');
     }
   };

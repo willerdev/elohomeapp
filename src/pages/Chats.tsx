@@ -100,7 +100,9 @@ export const Chats = () => {
               content: msg.content,
               time: new Date(msg.created_at).toLocaleTimeString(),
               isSender: msg.sender_id === user.id
-            }))
+            })),
+            lastMessage: messages[messages.length - 1]?.content || '',
+            lastMessageTime: messages[messages.length - 1]?.created_at || ''
           }}
           onBack={() => setSelectedChatId(null)}
           onSendMessage={handleSendMessage}
@@ -112,7 +114,10 @@ export const Chats = () => {
             <p className="text-center text-gray-500 mt-8">No chats yet</p>
           ) : (
             <ChatList
-              chats={chats}
+              chats={chats.map(chat => ({
+                ...chat,
+                last_message: chat.last_message || ''  // Convert null to empty string
+              }))}
               onSelectChat={setSelectedChatId}
               selectedChatId={selectedChatId}
               currentUserId={user.id}
